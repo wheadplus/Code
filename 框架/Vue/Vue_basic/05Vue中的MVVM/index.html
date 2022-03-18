@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <!--
+        MVVM模型：
+            1. M 模型(Model)：data中的数据
+            2. V: 视图(View): 模板代码
+            3. VM: 视图模型(ViewModel): Vue实例 
+        观察console.log输出vm实例发现：
+            1. data的属性都在vm上
+            2. vm的属性和Vue原型上所有属性都可以在模板中直接使用
+    -->
+    <div>{{name}}</div>
+    <div>{{home}}</div>
+    <h1>通过vm实例调用Vue的属性和方法,</h1>
+    <div>{{$emit}}</div>
+    <div>{{$el}}</div>
+</div>
+<script>
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        el:'#app',
+        data:{
+            name: 'jim',
+            home:'beijing',
+            url:'http://www.baidu.com'
+        }
+    })
+    console.log('vm', vm)
+</script>
+</body>
+</html>
