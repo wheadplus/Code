@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+
+</head>
+<body>
+    <!--
+      过滤
+        
+    -->
+<div id="app">
+    <h2>列表排序</h2>
+    <input type="text" v-model="keyword">
+    <button @click="updateItem">马老师改item</button>
+    <ul>
+        <li v-for="(el,index) in filterList" :key="el.id">
+            {{el.name}}年龄是:{{el.age}} {{el.sex}}
+        </li>
+    </ul>
+ 
+</div>
+<script>
+    Vue.config.productionTip = false
+
+    new Vue({
+        el:'#app',
+        data:{
+            name: '红烧jimmy饭',
+            lists: [
+                {id:1,name:'jim',age:16},
+                {id:2,name:'coco',age:11},
+                {id:3,name:'long',age:19},
+                {id:3,name:'jimmyco',age:36}
+            ],
+            booK: {
+                name: 'kill bill',
+                price:16,
+                date: '2020-11-19'
+            },
+            keyword: '',
+            sortType: ''
+        },
+        computed:{
+            filterList() {
+                let arr =  this.lists.filter(el=> {
+                    return el.name.includes(this.keyword)
+                    // return  el.name.indexOf(this.keyword)!== -1
+                })
+                if(this.sortType) {
+                    arr.sort((a,b) =>{
+                        return this.sortType === 1 ?  b.age - a.age : a.age - b.age
+                    })
+                }
+                return arr
+            }
+        },
+        methods: {
+            updateItem(){
+						// this.lists[0].name = '马老师' //奏效
+						// this.lists[0].age = 50 //奏效
+						// this.lists[0] = {id:'001',name:'马老师',age:50} //不奏效
+						this.lists.splice(0,1,{id:'001',name:'马老师',age:50})
+                        // Object.definedProtety 无法监听新增的属性，所以vue封装Vue.$set 去新增属性
+                        this.$set(this.lists[0],'sex','nv') 
+					}
+        }
+    })
+</script>
+</body>
+</html>

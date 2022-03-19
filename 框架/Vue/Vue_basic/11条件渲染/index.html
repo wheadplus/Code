@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+
+</head>
+<body>
+    <!--
+        V-if v-show 区别
+            V-if dom不见了
+            v-show dom元素还在，只是切换display
+    -->
+<div id="app">
+    <h3>n值：{{n}}</h3>
+    <button @click="n++">n++</button>
+    
+    <div v-if="n<5">{{ name }}</div>
+    <div v-show="n<10">{{ name }}</div>
+</div>
+<script>
+    Vue.config.productionTip = false
+
+    new Vue({
+        el:'#app',
+        data:{
+            name: 'jim',
+            home:'beijing',
+            url:'http://www.baidu.com',
+            n:1
+        }
+    })
+</script>
+</body>
+</html>

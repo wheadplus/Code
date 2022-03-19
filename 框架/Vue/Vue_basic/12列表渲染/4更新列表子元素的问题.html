@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+
+</head>
+<body>
+    <!--
+      过滤
+        
+    -->
+<div id="app">
+    <h2>更新子元素哦</h2>
+    <input type="text" v-model="keyword">
+    <button @click="sortType = 2">年龄升序</button>
+			<button @click="sortType = 1">年龄降序</button>
+			<button @click="sortType = 0">原顺序</button>
+    <ul>
+        <li v-for="(el,index) in filterList" :key="index">
+            {{el.name}}年龄是:{{el.age}}
+        </li>
+    </ul>
+ 
+</div>
+<script>
+    Vue.config.productionTip = false
+
+    new Vue({
+        el:'#app',
+        data:{
+            name: '红烧jimmy饭',
+            lists: [
+                {id:1,name:'jim',age:16},
+                {id:2,name:'coco',age:11},
+                {id:3,name:'long',age:19},
+                {id:3,name:'jimmyco',age:36}
+            ],
+            booK: {
+                name: 'kill bill',
+                price:16,
+                date: '2020-11-19'
+            },
+            keyword: '',
+            sortType: ''
+        },
+        computed:{
+            filterList() {
+                let arr =  this.lists.filter(el=> {
+                    return el.name.includes(this.keyword)
+                    // return  el.name.indexOf(this.keyword)!== -1
+                })
+                if(this.sortType) {
+                    arr.sort((a,b) =>{
+                        return this.sortType === 1 ?  b.age - a.age : a.age - b.age
+                    })
+                }
+                return arr
+            }
+        }
+    })
+</script>
+</body>
+</html>

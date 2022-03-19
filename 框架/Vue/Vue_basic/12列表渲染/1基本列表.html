@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+
+</head>
+<body>
+    <!--
+       v-for
+            遍历数组
+            遍历对象
+            遍历字符串
+            遍历次数
+        key的选择：
+            优先使用id等唯一挚值作为key
+            其次使用index，但是
+                若对数据进行：逆序添加、逆序删除等破坏顺序操作:
+				会产生没有必要的真实DOM更新 ==> 界面效果没问题, 但效率低。
+        
+    -->
+<div id="app">
+    <h2>遍历数组</h2>
+    <ul>
+        <li v-for="(el,index) in lists" :key="index">
+            {{el.name}}年龄是:{{el.age}}
+        </li>
+    </ul>
+    <h2>遍历对象</h2>
+    <ul>
+        <li v-for="(el,key) in booK" :key="key">
+            {{key}}:{{el}}
+        </li>
+    </ul>
+    <h2>遍历字符串</h2>
+    <ul>
+        <li v-for="(el,index) in name" :key="index">
+            {{el}}
+        </li>
+    </ul>
+    <h2>遍历次数</h2>
+
+    <ul>
+        <li v-for="(el,index) in 13" :key="index">
+            {{index}}--{{el}}
+        </li>
+    </ul>
+</div>
+<script>
+    Vue.config.productionTip = false
+
+    new Vue({
+        el:'#app',
+        data:{
+            name: '红烧jimmy饭',
+            lists: [
+                {id:1,name:'jim',age:16},
+                {id:2,name:'coco',age:16},
+                {id:3,name:'long',age:16}
+            ],
+            booK: {
+                name: 'kill bill',
+                price:16,
+                date: '2020-11-19'
+            }
+        }
+    })
+</script>
+</body>
+</html>
