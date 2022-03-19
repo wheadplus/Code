@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        *{
+				margin-top: 20px;
+			}
+			.demo1{
+				height: 50px;
+				background-color: skyblue;
+			}
+			.box1{
+				padding: 5px;
+				background-color: skyblue;
+			}
+			.box2{
+				padding: 5px;
+				background-color: orange;
+			}
+			.list{
+				width: 200px;
+				height: 200px;
+				background-color: peru;
+				overflow: auto;
+			}
+			li{
+				height: 100px;
+			}
+    </style>
+</head>
+<body>
+    <!--
+        Vue中的事件修饰符：
+            1. prevent： 阻止默认事件（）
+            2. stop： 阻止事件冒泡
+            3. once： 事件只触发一次
+            4. capture ：使用事件的捕获模式
+            5. self：只有event.target 是当前操作的元素时才出发事件
+            6. passive：事件的默认行为立即执行，无需等待时间回调执行完毕
+        
+    -->
+    <div id="app">
+        
+			<!-- 阻止默认事件（常用） -->
+            <h3> 阻止默认事件,a标签默认跳转不执行</h3>
+			<a href="http://www.baidu.com" @click.prevent="showInfo">点我提示信息</a>
+
+			<!-- 阻止事件冒泡（常用） -->
+            <h3>stop阻止事件冒泡</h3>
+			<div class="demo1" @click="showInfo">
+				<button @click.stop="showInfo">点我提示信息</button>
+				<!-- 修饰符可以连续写 -->
+				<!-- <a href="http://www.atguigu.com" @click.prevent.stop="showInfo">点我提示信息</a> -->
+			</div>
+
+			<!-- 事件只触发一次（常用） -->
+			<button @click.once="showInfo">点我提示信息</button>
+
+			<!-- 使用事件的捕获模式 -->
+            <h3>capture捕获模式例子</h3>
+			<div class="box1" @click.capture="showMsg(1)">
+				div1
+				<div class="box2" @click="showMsg(2)">
+					div2
+				</div>
+			</div>
+
+			<!-- 只有event.target是当前操作的元素时才触发事件； -->
+            <h3>.self 例子,外层不加会执行两次</h3>
+			<div class="demo1" @click.self="showInfo">
+                
+				<button @click="showInfo">点我提示信息</button>
+			</div>
+
+			<!-- 事件的默认行为立即执行，无需等待事件回调执行完毕； -->
+			<ul @wheel.passive="demo" class="list">
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+			</ul>
+
+
+    </div>
+
+    <script>
+        Vue.config.productionTio = false
+
+        const vm = new Vue({
+            el:'#app',
+            data() {
+                return {
+                    name: 'jim'
+                }
+            },
+            methods: {
+                showInfo(event) {
+                    alert('nice to meet y')
+                },
+                showMsg(msg) {
+                    console.log(msg)
+                },
+                demo(){
+					for (let i = 0; i < 1000; i++) {
+						console.log('#')
+					}
+					console.log('累坏了')
+				}
+            }
+        })
+        console.log(vm)
+    </script>
+</body>
+</html>

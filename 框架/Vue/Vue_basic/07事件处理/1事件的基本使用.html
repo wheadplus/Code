@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <!--
+        事件的基本使用：
+            1.使用v-on:xx 或 @xx 绑定事件，其中xx为事件名
+            2. 事件的回调需要配置在methods对象中，最终在vm上
+            3. methods 中配置函数，都是被Vue所管理的函数，this指向是vm或者组件实例
+            4。methods 不要用箭头函数，否则this是外层元素，非vm
+            5.@click="showMsg" 和@click="showMsg($event)"结果一样，但后者能传参数
+    -->
+    <div id="app">
+        <h3>{{name}}</h3>
+
+        <button @click="showMsg"> showMsg(不传参数)</button>
+
+        <button @click="showMsg2($event,55)"> showMsg(参数)</button>
+    </div>
+
+    <script>
+        Vue.config.productionTio = false
+
+        const vm = new Vue({
+            el:'#app',
+            data() {
+                return {
+                    name: 'jim'
+                }
+            },
+            methods: {
+                showMsg(event) {
+                    alert('nice to meet y')
+                },
+                showMsg2(event,num) {
+                    console.log(event,num)
+                    alert('ha')
+                }
+            }
+        })
+        console.log(vm)
+    </script>
+</body>
+</html>
