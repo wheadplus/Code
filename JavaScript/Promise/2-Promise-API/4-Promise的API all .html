@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise API - all</title>
+</head>
+
+<body>
+</body>
+<script>
+    let p = new Promise((resolve, reject) => {
+        resolve('p ok')
+    })
+    let p2 = Promise.resolve('p2 success !')
+    let p3 = Promise.reject('p3 error !')
+    
+    let result = Promise.all([p, p2, p3])
+    // let result = Promise.all([p, p2])
+    /*
+        有一个错误直接catch报错，所有都成功时返回成功，走then操作
+    */
+     
+    result.then(res => {
+        console.log(res)
+    }).catch(err => {
+        console.log(err)
+    })
+    console.log(result)
+</script>
+
+</html>

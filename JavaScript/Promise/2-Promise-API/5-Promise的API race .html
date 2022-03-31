@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise API - race</title>
+</head>
+
+<body>
+</body>
+<script>
+    let p = new Promise((resolve, reject) => {
+        // resolve('p ok')
+        setTimeout(() => {
+            resolve('p ok')
+        },4000)
+    })
+    let p2 = Promise.resolve('p2 success !')
+    let p3 = Promise.reject('p3 error !')
+    // race 竞速，哪个快返回那个，报错拜拜，所有都错误才catch报错
+    let result = Promise.race([p, p2, p3])
+    // let result = Promise.race([p3])
+    result.then( value => {
+        console.log(value)
+    }).catch(err => {
+        console.log(err)
+    })
+    console.log(result)
+</script>
+
+</html>

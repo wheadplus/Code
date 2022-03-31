@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise API</title>
+</head>
+
+<body>
+</body>
+<script>
+    let p = new promise((resolve, reject) => {
+        console.log('1111')
+        // 修改promise 状态，resolve返回成功，reject返回失败
+        // resolve('success')
+        reject('error')
+    })
+
+    console.log('2222')
+    
+    p.catch(reason => {
+        console.log(reason)
+    })
+</script>
+
+</html>
